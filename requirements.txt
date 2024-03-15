@@ -1,0 +1,11 @@
+selenium
+webdriver_manager
+requests
+bs4
+pandas
+torch
+transformers
+deepl
+scikit-learn
+pyarrow
+lxml
