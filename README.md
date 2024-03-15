@@ -106,7 +106,7 @@ All the processes are handled with try except blocks and written in a 'logs' fil
 3. Run 'run.py <file_path_containing_websites>'  
 4. To use the multi-threaded version un-comment the code for it and specify how many workers do you need.I recommend maximum 5, but If you have computational   super-powers you can use as many as you want until it crashes :)  
 5. The outputs are in 'results.csv' file in the format 'website, formatted_address, top_candidates'  
-6. The logs are in 'logs' file with all the errors and exceptions.
+6. The logs will be in 'logs' file containing all the errors and exceptions.
 
 ## Links for download
 
