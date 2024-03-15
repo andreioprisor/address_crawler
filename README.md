@@ -1,7 +1,7 @@
 
 ## Address Extraction Tool
 
-This repository contains the documented development of a fast address extraction tool that can crawl the physical address of any business from it's website.The tool employs a dual-model architecture, with each model leveraging a BERT backbone from Hugging Face.
+This repository contains the documented development of a fast address extraction tool that can crawl the physical address of any business from its website.The tool employs a dual-model architecture, with each model leveraging a BERT backbone from Hugging Face.
 
 The first model is a binary Classification model featuring one fully connected (FC) layer, used for predicting the probability of a text sequence being an address. The second is a Named Entity Recognition (NER) model, tasked with formatting the address as requested.
 
