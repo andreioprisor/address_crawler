@@ -97,7 +97,7 @@ I've optimised the crawler so as the translator API has minimum usage(the free t
 Also, because each website takes on average 3 seconds, I've written a simple multi-threading script to reduce the time needed for crawling 2500 websites from 150 minutes to 60 minutes with 3 threads.
 
 Below is a diagram of the architecture:
-![Crawler](Diagram.png "Crawler architecture")
+![Crawler](diagram.png "Crawler architecture")
 
 All the processes are handled with try except blocks and written in a 'logs' file.
 ## How to use
