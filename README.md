@@ -52,7 +52,7 @@ After that the scraper sorts the found  addresses based on their probability and
 ## Formatting the address
 
 The model has a good accuracy, but given the incredible variability we can't use only the first prediction in the list, so we have to make use of all of them.
-To formatt the address, the regex approach doesn't yield good results for only one country, let alone 10 or 20 more, so a NER model approach is preffered.  
+To format the address, the regex approach doesn't yield good results for only one country, let alone 10 or 20 more, so a NER model approach is preferred.  
 The NER formatter checks all the addresses in the list and chooses the one that has the most attributes matched(eg. 'Russell Road, Edinburgh EH11 2LS' outputs the road, the city and the postcode while 'Edinburgh EH11 2LS' the city and the postcode, so the model will pick the first one.)
 
 ## NER model for Formatting
@@ -69,9 +69,9 @@ In this example the model should mark text as follows:
 'EH11 2LS' with PostalCode tags  
 
 To achieve this, a pretrained DistilBert is fine-tuned with a FC layer with 9 labels : ['O', 'StreetNumber', 'StreetName', 'Unit', 'Municipality', 'Province', 'PostalCode', 'Orientation', 'GeneralDelivery'].I used a dataset with annotated   addresses from US, UK, DE, FR, ES, CZ and AU with a randomized text insertion function which inserts random text generated with gpt2 at beginning, end or in the middle like this:     
-For 'Russell Road, Edinburgh EH11 2LS' it will output "'Some random text' Russell Road, Edinburgh EH11 2LS 'other random text'". with 'O' tags added to the labels list for the random text.This tehnique worked best for labeling the irrelevant text surrounding the address.
+For 'Russell Road, Edinburgh EH11 2LS' it will output "'Some random text' Russell Road, Edinburgh EH11 2LS 'other random text'". with 'O' tags added to the labels list for the random text.This technique worked best for labeling the irrelevant text surrounding the address.
 
-I'm using DistilBert because it's fast'for training but mor important for inference; we we will use it 3 times on each website because we try to format the first 3 picks of the address classification model.
+I'm using DistilBert because it's fast for training but more important for inference; we we will use it 3 times on each website because we try to format the first 3 picks of the address classification model.
 
 Afer playing out a bit with the hyper-parameters, I built an accurate model with a prediction rate of 95% on unseen data, supporting those countries ['us', 'de', 'uk', 'fr', 'au', 'cz', 'es'].
 
@@ -97,14 +97,14 @@ I've optimised the crawler so as the translator API has minimum usage(the free t
 Also, because each website takes on average 3 seconds, I've written a simple multi-threading script to reduce the time needed for crawling 2500 websites from 150 minutes to 60 minutes with 3 threads.
 
 Below is a diagram of the architecture:
-![Crawler](diagram.png "Crawler architecture")
+![Crawler](Diagram.png "Crawler architecture")
 
 All the processes are handled with try except blocks and written in a 'logs' file.
 ## How to use
 1. Download the checkpoints of the NER model and the Classification model from the links below([1] and [2])and keep the names  
 2. Install dependencies with 'pip install -r requirements.txt'  
 3. Run 'run.py <file_path_containing_websites>'  
-4. To use the multi-threaded version un-comment the code for it and specify how many workers do you need.I reccomend maximum 5, but If you have computational   super-powers you can use as many as you want until it crashes :)  
+4. To use the multi-threaded version un-comment the code for it and specify how many workers do you need.I recommend maximum 5, but If you have computational   super-powers you can use as many as you want until it crashes :)  
 5. The outputs are in 'results.csv' file in the format 'website, formatted_address, top_candidates'  
 6. The logs are in 'logs' file with all the errors and exceptions.
 
