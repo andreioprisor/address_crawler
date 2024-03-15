@@ -1,9 +1,9 @@
 
 ## Address Extraction Tool
 
-This repository contains the documented developing of a fast address extraction tool that can crawl the physical address of any business from it's website.The tool employs a dual-model architecture, with each model leveraging a BERT backbone from Hugging Face.
+This repository contains the documented development of a fast address extraction tool that can crawl the physical address of any business from it's website.The tool employs a dual-model architecture, with each model leveraging a BERT backbone from Hugging Face.
 
-The first model is a Classification model featuring one fully connected (FC) layer, used for predicting the probability of a text sequence being an address. The second is a Named Entity Recognition (NER) model, tasked with formatting the address as requested.
+The first model is a binary Classification model featuring one fully connected (FC) layer, used for predicting the probability of a text sequence being an address. The second is a Named Entity Recognition (NER) model, tasked with formatting the address as requested.
 
 In the following sections, I will dive deeper into the reasoning behind this architectural choice and also explain how the crawling process operates.
 
@@ -80,10 +80,12 @@ Here is a diagram with the metrics on this model:
 ![NER metrics](metrics_ner.png "Crawler architecture")
 
 ## Classification Model
+Leveraging the pipeline from the Furniture Scraper project made this part of the process quite straightforward.
 
-The classification model is being used for ranking the top candidates for the   addresses as follows: We calculate the probability of a text being an address and append it to a list and then we sort that list in descending order.I've used a Distilbert backbone with one FC layer of classification on [CLS] token.I'm labeling each data sample with either TRUE or FALSE.  
+The classification model is being used for ranking the top candidates for the addresses as follows: We calculate the probability of a text being an address and append it to a list and then we sort that list in descending order.I've used a bert-base uncased backbone with one FC layer of classification on [CLS] token.I'm labeling each data sample with either TRUE or FALSE.  
+
 The positive labels were crawled by me from a random address generator website and for the negative samples I crawled all the websites provided in the parquet file.  
-All training processes are contained in train_model.py file
+All training processes for this model are contained in train_model.py file
 
 ## Crawler
 My initial attempt for the crawler was just a selenium script, but it was too slow so I chose requests library.To handle the cases in which requests library returns a non-valid page, I'm using selenium headless with a function for pop-up bypasses.In the Crawler Class we update the page source for each website and the current url accordingly, being available for all functions.  
