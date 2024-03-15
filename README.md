@@ -99,12 +99,14 @@ Also, because each website takes on average 3 seconds, I've written a simple mul
 Below is a diagram of the architecture:
 ![Crawler](diagram.png "Crawler architecture")
 
+All the processes are handled with try except blocks and written in a 'logs' file.
 ## How to use
 1. Download the checkpoints of the NER model and the Classification model from the links below([1] and [2])and keep the names  
 2. Install dependencies with 'pip install -r requirements.txt'  
 3. Run 'run.py <file_path_containing_websites>'  
 4. To use the multi-threaded version un-comment the code for it and specify how many workers do you need.I reccomend maximum 5, but If you have computational   super-powers you can use as many as you want until it crashes :)  
 5. The outputs are in 'results.csv' file in the format 'website, formatted_address, top_candidates'  
+6. The logs are in 'logs' file with all the errors and exceptions.
 
 ## Links for download
 
